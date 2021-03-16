@@ -39,4 +39,32 @@ d3.json("samples.json").then(function(data) {
       
     // // // //bar chart 
     
-    
+    function buildPlot(filterSampleData) {
+        // data is coming from function above this one buildPlot(filterSampleData[0])
+        console.log(filterSampleData)
+      
+        var barTrace = {
+          x: filterSampleData.sample_values.slice(0,10).reverse(),
+          y: filterSampleData.otu_ids.slice(0,10).map(otuid => `OTU ${otuid}`).reverse(),
+          text: filterSampleData.otu_labels.slice(0,10).reverse(),
+              hoverlabel: {font: {size: 12}},
+              marker: {
+                  color: 'blue',
+                  opacity: 1,
+              },
+            type: 'bar',
+            orientation: 'h'
+        }
+        // console.log(barTrace)
+      var data = [barTrace];
+      
+      var layout = {
+            title: "Top 10 OTU",
+            yaxis: { tickmode: "linear" },
+            margin: {
+                l: 100,
+                r: 100,
+                t: 100,
+                b: 40
+        }}
+     
