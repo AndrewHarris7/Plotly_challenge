@@ -67,4 +67,49 @@ d3.json("samples.json").then(function(data) {
                 t: 100,
                 b: 40
         }}
-     
+      // Plot the chart to a div tag with id "bar"
+          Plotly.newPlot("bar", data, layout);
+      
+      }
+      // function greeting(name) {
+      //   // console.log("My name is", name)
+      //   var reverse = name.split("").reverse().join("")
+      //   console.log(reverse)
+      // }
+      
+      // greeting("Kelly")
+      // greeting("Philip")
+      
+      function buildBubblePlot(filterSampleData){
+      
+        console.log(filterSampleData)
+      
+        var bubbleTrace = {
+          x: filterSampleData.otu_ids,
+          y: filterSampleData.sample_values,
+          text: filterSampleData.otu_labels,
+          mode: "markers",
+          marker: {
+                        size: filterSampleData.sample_values,
+                        color: filterSampleData.otu_ids, 
+                        colorscale: "Earth"},
+          type: "scatter"
+      
+          
+        }
+      var bubbleData = [bubbleTrace];
+      var bubbleLayout = {
+        title: `Test Subject ${filterSampleData.id} Belly Button Biodiversity`,
+        margin: {
+          l: 50,
+          r: 100,
+          t: 30,
+          b: 40
+        }
+      }
+      // Plot the chart to a div tag with id "bubble"
+      Plotly.newPlot("bubble", bubbleData, bubbleLayout);
+      
+      }
+      
+        });
